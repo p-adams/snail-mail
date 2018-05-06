@@ -1,0 +1,83 @@
+<template>
+    <v-dialog
+        v-model="isOpen"
+        persistent
+        max-width="290"
+    >
+        <v-card>
+            <v-card-title class="headline">Entry form</v-card-title>
+            <v-card-text>
+            <v-form>
+                <v-text-field
+                    label="username"
+                    v-model="user.username"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    type="password"
+                    label="password"
+                    v-model="user.password"
+                    required
+                ></v-text-field>
+            </v-form>
+            </v-card-text>
+            <v-card-text class="red--text">
+              {{ userAuthenticationErrorMessage }}
+            </v-card-text>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                flat="flat"
+                @click.native="$emit('update:isOpen', false)"
+            >Cancel</v-btn>
+            <v-btn
+                flat="flat"
+                @click="handleEntryFormSubmit"
+                :disabled="!isFormCompleted"
+            >{{ proceedText }}
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
+</template>
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+  name: "TheEntryForm",
+  props: {
+    isOpen: {
+      type: Boolean,
+      required: true
+    }
+  },
+  data() {
+    return {
+      user: {
+        username: "",
+        password: ""
+      },
+      proceedText: "Authenticate"
+    };
+  },
+  methods: {
+    ...mapActions(["authenticateUser"]),
+    handleEntryFormSubmit() {
+      this.proceedText = "Authenticating...";
+      this.authenticateUser(this.user).then(() => {
+        if (this.isUserAuthenticated) {
+          this.$emit("update:isOpen", false);
+        } else {
+          this.proceedText = "Authenticate";
+        }
+      });
+    }
+  },
+  computed: {
+    ...mapGetters(["userAuthenticationErrorMessage", "isUserAuthenticated"]),
+    isFormCompleted() {
+      return this.user.username.length && this.user.password.length;
+    }
+  }
+};
+</script>
+

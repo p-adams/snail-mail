@@ -10,8 +10,13 @@
     "e2e:open": "vue-cli-service e2e:open"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^2.0.1",
+    "hapi": "^17.4.0",
+    "sqlite3": "^4.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vuetify": "^1.0.17",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
