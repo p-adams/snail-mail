@@ -1,4 +1,4 @@
 import axios from "axios";
 
-export const getEmails = endpoint =>
-  axios.get(endpoint).then(result => result.data.emails);
+export const getEmails = username =>
+  axios.get(`/api/emails/${username}`).then(result => result.data);

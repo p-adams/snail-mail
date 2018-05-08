@@ -22,8 +22,10 @@ const Emails = {
     }
   },
   actions: {
-    loadInbox({ commit }) {
-      getEmails("api/email-inbox").then(emails => {
+    loadUserInbox({ commit, rootState }, user) {
+      console.log(user.username);
+      getEmails(user.username).then(emails => {
+        console.log(emails);
         commit("loadInbox", { emails });
       });
     },

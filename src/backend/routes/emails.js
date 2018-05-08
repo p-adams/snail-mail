@@ -1,8 +1,9 @@
 const { emailsDb, usersDb } = require("../db");
 const promiseHelper = require("../utils/createPromise");
 
-const getEmailsByRecipientName = username =>
-  promiseHelper.createPromise((resolve, reject) => {
+const getEmailsByRecipientName = username => {
+  console.log(username);
+  return promiseHelper.createPromise((resolve, reject) => {
     emailsDb.each(
       "SELECT * FROM EMAILS WHERE RECIPIENTS = ?",
       [username],
@@ -12,6 +13,7 @@ const getEmailsByRecipientName = username =>
       }
     );
   });
+};
 
 const getSentEmailsBySenderName = sender =>
   promiseHelper.createPromise((resolve, reject) => {

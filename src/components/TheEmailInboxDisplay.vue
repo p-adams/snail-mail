@@ -30,11 +30,8 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "TheEmailInboxDisplay",
-  created() {
-    this.loadEmails();
-  },
   methods: {
-    ...mapActions(["loadEmails", "openEmail"])
+    ...mapActions(["openEmail"])
   },
   computed: {
     ...mapGetters(["getEmails"]),

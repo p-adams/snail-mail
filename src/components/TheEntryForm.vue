@@ -53,19 +53,22 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
+        username: "johnsmith@meow.com",
+        password: "meow"
       },
       proceedText: "Authenticate"
     };
   },
   methods: {
-    ...mapActions(["authenticateUser"]),
+    ...mapActions(["authenticateUser", "loadUserInbox"]),
     handleEntryFormSubmit() {
       this.proceedText = "Authenticating...";
       this.authenticateUser(this.user).then(() => {
+        // if user provided valid name and password
+        // close the modal and load emails
         if (this.isUserAuthenticated) {
           this.$emit("update:isOpen", false);
+          this.loadUserInbox(this.authenticatedUser);
         } else {
           this.proceedText = "Authenticate";
         }
@@ -73,7 +76,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["userAuthenticationErrorMessage", "isUserAuthenticated"]),
+    ...mapGetters([
+      "authenticatedUser",
+      "userAuthenticationErrorMessage",
+      "isUserAuthenticated"
+    ]),
     isFormCompleted() {
       return this.user.username.length && this.user.password.length;
     }
