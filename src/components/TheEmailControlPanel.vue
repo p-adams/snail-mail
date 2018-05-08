@@ -1,11 +1,15 @@
 <template>
   <v-toolbar>
     <v-toolbar-title>Snail Mail</v-toolbar-title>
+    <active-user-view-panel v-if="isUserAuthenticated"/>
+    <registration-view-panel v-else/>
+    <!--
     <div v-if="!isUserAuthenticated">
       <v-btn
         @click.native.stop="entryFormIsOpen = true"
         flat
-      >Sign in</v-btn>
+      >Sign in
+      </v-btn>
       <the-entry-form :is-open.sync="entryFormIsOpen"/>
     </div>
     <div v-else>
@@ -25,15 +29,18 @@
         :disabled="emailIsNotChecked"
         flat>Trash</v-btn>
     </v-toolbar-items>
+    -->
   </v-toolbar>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 import TheEntryForm from "./TheEntryForm";
+import RegistrationViewPanel from "./RegistrationViewPanel";
+import ActiveUserViewPanel from "./ActiveUserViewPanel";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "TheEmailControlPanel",
-  components: { TheEntryForm },
+  components: { ActiveUserViewPanel, TheEntryForm, RegistrationViewPanel },
   data() {
     return {
       entryFormIsOpen: false

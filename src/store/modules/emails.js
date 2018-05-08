@@ -23,7 +23,7 @@ const Emails = {
   },
   actions: {
     loadUserInbox({ commit, rootState }, user) {
-      console.log(user.username);
+      console.log(rootState.Users.user.authenticated);
       getEmails(user.username).then(emails => {
         console.log(emails);
         commit("loadInbox", { emails });
