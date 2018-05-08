@@ -1,21 +1,21 @@
 <template>
   <v-card>
     <h5>Inbox</h5>
-    <v-list v-if="allEmails.length > 0">
+    <v-list v-if="emails.length > 0">
       <v-list-tile
-          v-for="email in allEmails"
-          :key="email.id"
+          v-for="email in emails"
+          :key="email.ID"
           avatar
       >
-      <v-list-tile-action>
-        <v-checkbox v-model="email.checked" light></v-checkbox>
-      </v-list-tile-action>
+      <!-- <v-list-tile-action>
+        <v-checkbox light></v-checkbox>
+      </v-list-tile-action> -->
       <v-list-tile-content
         class="inbox-email"
-        @click="openEmail({id: email.id})"
+        @click="openEmail({ID: email.ID})"
       >
-        <v-list-tile-title> {{ email.sender }}</v-list-tile-title>
-        <v-list-tile-sub-title> {{ email.recipient }}</v-list-tile-sub-title>
+        <v-list-tile-title> {{ email.SENDER }}</v-list-tile-title>
+        <v-list-tile-sub-title> {{ email.SUBJECT }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     </v-list>
@@ -34,10 +34,7 @@ export default {
     ...mapActions(["openEmail"])
   },
   computed: {
-    ...mapGetters(["getEmails"]),
-    allEmails() {
-      return this.getEmails.filter(email => email.sender === "john@meow.com");
-    }
+    ...mapGetters(["emails"])
   }
 };
 </script>

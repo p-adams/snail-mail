@@ -9,7 +9,7 @@ const Emails = {
   },
   mutations: {
     loadInbox(state, options) {
-      state.emails.push(...options.emails);
+      state.emails.push(options.emails);
     },
     openEmail(state, options) {
       state.openedEmail = options.email;
@@ -48,7 +48,7 @@ const Emails = {
     }
   },
   getters: {
-    getEmails: state => state.emails,
+    emails: state => state.emails,
     getSelectedEmail: state => state.openedEmail,
     getSelectedEmailAction: state => state.selectedEmailAction
   }

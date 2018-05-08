@@ -49,9 +49,9 @@ export default {
   computed: {
     ...mapGetters(["getEmails", "isUserAuthenticated", "authenticatedUser"]),
     emailIsNotChecked() {
-      return (
-        this.getEmails.filter(email => email.checked === true).length === 0
-      );
+      // return (
+      // this.getEmails.filter(email => email.checked === true).length === 0
+      // );
     },
     welcomeMessage() {
       const formatUsername = username =>
