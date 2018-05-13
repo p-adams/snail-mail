@@ -1,12 +1,29 @@
 <template>
   <v-toolbar-items>
-    <v-btn
-      flat>Register</v-btn>
-    <v-btn
-      flat>Login</v-btn>
+    <button-wrapper
+      buttonTitle="Register"
+      :event="showRegistrationForm"
+    />
+    <button-wrapper
+      buttonTitle="Login"
+      :event="showLoginForm"
+    />
   </v-toolbar-items>
 </template>
 <script>
-export default {};
+import ButtonWrapper from "./ButtonWrapper";
+export default {
+  components: {
+    ButtonWrapper
+  },
+  methods: {
+    showRegistrationForm() {
+      this.$router.push({ name: "Registration" });
+    },
+    showLoginForm() {
+      this.$router.push("login");
+    }
+  }
+};
 </script>
 

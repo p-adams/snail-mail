@@ -22,7 +22,7 @@ import EmailReader from "./EmailReader";
 import InboxDisplay from "./InboxDisplay";
 import ThePendingEmailStatusPanel from "./ThePendingEmailStatusPanel";
 export default {
-  name: "MainEmailActivityContainer",
+  name: "EmailHomepage",
   components: {
     EmailComposer,
     EmailReader,

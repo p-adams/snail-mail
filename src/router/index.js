@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import MainEmailPanel from "@/components/MainEmailPanel";
+import EmailHomepage from "@/components/EmailHomepage";
 import WelcomePage from "@/components/WelcomePage";
 import LoginForm from "@/components/LoginForm";
 import RegistrationForm from "@/components/RegistrationForm";
@@ -14,13 +14,13 @@ export default new Router({
       component: WelcomePage
     },
     {
-      path: "/main",
-      name: "MainEmailPanel",
-      component: MainEmailPanel
+      path: "/email-homepage",
+      name: "EmailHomepage",
+      component: EmailHomepage
     },
     {
       path: "/login",
-      name: "LoginForm",
+      name: "Login",
       component: LoginForm
     },
     {
