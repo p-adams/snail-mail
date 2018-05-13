@@ -1,7 +1,7 @@
 <template>
   <v-btn
     class="button"
-    @click="event"
+    v-on="clickListener"
     flat
     :outline="true"
   >{{ buttonTitle }}</v-btn>
@@ -9,17 +9,21 @@
 <script>
 export default {
   props: {
-    event: {
-      type: Function,
-      required: true
-    },
     buttonTitle: {
       type: String,
       required: true,
       default: ""
-    },
-    size: {
-      type: String
+    }
+  },
+  computed: {
+    clickListener() {
+      const self = this;
+      return {
+        ...this.$listeners,
+        click: function() {
+          self.$emit("click");
+        }
+      };
     }
   }
 };

@@ -2,11 +2,11 @@
   <v-toolbar-items>
     <button-wrapper
       buttonTitle="Register"
-      :event="showRegistrationForm"
+      @click="showRegistrationForm"
     />
     <button-wrapper
       buttonTitle="Login"
-      :event="showLoginForm"
+      @click="showLoginForm"
     />
   </v-toolbar-items>
 </template>
