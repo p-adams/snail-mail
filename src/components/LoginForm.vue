@@ -1,15 +1,24 @@
 <template>
   <the-entry-form>
     <span slot="title">Login</span>
-    <v-text-field/>
-    <v-text-field/>
+    <v-text-field
+      v-model="user.username"
+      placeholder="Enter email"
+    />
+    <v-text-field
+      v-model="user.password"
+      placeholder="Enter password"
+    />
     <div slot="buttons">
-      <v-btn>Cancel</v-btn>
-      <v-btn>Login</v-btn>
+      <v-btn @click="() => this.$router.push('/home')">Cancel</v-btn>
+      <v-btn
+        @click="handleLogin"
+        :disabled="!isFormCompleted">Login</v-btn>
     </div>
   </the-entry-form>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 import TheEntryForm from "./TheEntryForm";
 export default {
   components: {
@@ -26,16 +35,19 @@ export default {
   },
   methods: {
     ...mapActions(["authenticateUser", "loadUserInbox"]),
-    handleEntryFormSubmit() {
+    handleLogin() {
       this.proceedText = "Authenticating...";
       this.authenticateUser(this.user).then(() => {
         // if user provided valid name and password
         // load emails and direct user to their email homepage
         if (this.isUserAuthenticated) {
-          // this.$emit("update:isOpen", false);
           this.loadUserInbox(this.authenticatedUser);
         } else {
-          this.proceedText = "Authenticate";
+          if (this.showErrorPage) {
+            this.$router.push("/error");
+          } else {
+            this.proceedText = "Authenticate";
+          }
         }
       });
     },
@@ -47,10 +59,11 @@ export default {
     ...mapGetters([
       "authenticatedUser",
       "userAuthenticationErrorMessage",
-      "isUserAuthenticated"
+      "isUserAuthenticated",
+      "showErrorPage"
     ]),
     isFormCompleted() {
-      return this.user.username.length && this.user.password.length;
+      return this.user.username.length > 0 && this.user.password.length > 0;
     }
   }
 };

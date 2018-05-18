@@ -6,7 +6,8 @@ const UsersModule = {
       password: undefined,
       authenticated: false
     },
-    userAuthenticationErrorMessage: undefined
+    userAuthenticationErrorMessage: undefined,
+    showErrorPage: false
   },
   mutations: {
     resetErrorMessage(state) {
@@ -17,6 +18,9 @@ const UsersModule = {
     },
     setCurrentUser(state, { username, password, authenticated }) {
       state.user = { username, password, authenticated };
+    },
+    setErrorPageVisibility(state, shouldShowErrorPage) {
+      state.showErrorPage = shouldShowErrorPage;
     },
     signOut(state) {
       state.user.authenticated = false;
@@ -49,7 +53,10 @@ const UsersModule = {
             });
           }
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          commit("setErrorPageVisibility", true);
+          console.error(error);
+        });
     },
     signOut({ commit }) {
       return commit("signOut");
@@ -59,7 +66,8 @@ const UsersModule = {
     userAuthenticationErrorMessage: state =>
       state.userAuthenticationErrorMessage,
     isUserAuthenticated: state => state.user.authenticated,
-    authenticatedUser: state => state.user
+    authenticatedUser: state => state.user,
+    showErrorPage: state => state.showErrorPage
   }
 };
 

@@ -3,7 +3,6 @@
     class="button"
     v-on="clickListener"
     flat
-    :outline="true"
   >{{ buttonTitle }}</v-btn>
 </template>
 <script>

@@ -1,6 +1,8 @@
 <template>
   <v-toolbar>
-    <v-toolbar-title class="title">Snail Mail</v-toolbar-title>
+    <v-toolbar-title class="title">
+      <h2>Snail Mail</h2>
+    </v-toolbar-title>
     <v-spacer></v-spacer>
     <active-user-view-panel v-if="isUserAuthenticated"/>
     <registration-view-panel v-else/>
