@@ -42,6 +42,7 @@ export default {
         // load emails and direct user to their email homepage
         if (this.isUserAuthenticated) {
           this.loadUserInbox(this.authenticatedUser);
+          this.$router.push("/email-homepage");
         } else {
           if (this.showErrorPage) {
             this.$router.push("/error");

@@ -1,15 +1,37 @@
 <template>
-  <v-toolbar-items>
+  <v-toolbar-items class="toolbar-items">
     <v-btn
       flat>Compose</v-btn>
     <v-btn
       flat>Trash</v-btn>
-    <v-avatar color="teal">
-      <span class="white--text headline">Meow</span>
+    <v-avatar
+      class="avatar"
+      @click="toggleAccountAdminVisibility"
+      color="amber"
+    >
+      <span class="white--text headline">
+        {{ firstCharOfUsername }}
+      </span>
     </v-avatar>
   </v-toolbar-items>
 </template>
 <script>
-export default {};
+import { mapActions, mapGetters } from "vuex";
+export default {
+  methods: { ...mapActions(["toggleAccountAdminVisibility"]) },
+  computed: {
+    ...mapGetters(["authenticatedUser"]),
+    firstCharOfUsername() {
+      return this.authenticatedUser.username.charAt(0);
+    }
+  }
+};
 </script>
+<style>
+.avatar {
+  cursor: pointer;
+}
+</style>
+
+
 
