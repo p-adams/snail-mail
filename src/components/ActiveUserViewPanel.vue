@@ -29,6 +29,7 @@ export default {
 </script>
 <style>
 .avatar {
+  margin-top: 5px;
   cursor: pointer;
 }
 </style>

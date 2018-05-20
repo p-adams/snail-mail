@@ -1,13 +1,18 @@
 <template>
     <v-navigation-drawer
         :value="accountAdminVisibility"
+        :hide-overlay="true"
+        :stateless="true"
         temporary
         dark
         absolute
-        :hide-overlay="true"
-        :stateless="true"
+        right
     >
         <v-list>
+            <v-icon
+                class="dismissNavDrawerIcon"
+                @click="toggleAccountAdminVisibility()"
+            >fas fa-times</v-icon>
             <v-list-tile>
                 <v-list-tile-title>
                     {{ authenticatedUser.username }}
@@ -28,7 +33,7 @@
     </v-navigation-drawer>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -37,9 +42,17 @@ export default {
       ]
     };
   },
+  methods: { ...mapActions(["toggleAccountAdminVisibility"]) },
   computed: {
     ...mapGetters(["authenticatedUser", "accountAdminVisibility"])
   }
 };
 </script>
-
+<style scoped>
+.dismissNavDrawerIcon {
+  float: right;
+  margin-right: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+</style>
