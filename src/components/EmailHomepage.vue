@@ -1,24 +1,27 @@
 <template>
-  <v-layout>
-    <v-container>
+  <v-container grid-list-md text-xs-center>
+    <v-layout row wrap>
+      <v-flex xs4>
+        <v-card>
+          <inbox-display/>
+        </v-card>
+      </v-flex>
       <v-flex>
         <v-card>
-          <v-flex xs4>
-            <inbox-display/>
-          </v-flex>
+          reader/composer
         </v-card>
-        <v-card>
-          <footer>
-            <the-pending-email-status-panel/>
-          </footer>
-        </v-card>
-      <!--<email-composer v-if="getSelectedEmailAction ==='compose'"/>
-      <email-reader v-else-if="getSelectedEmailAction ==='read'"/>-->
-      <!-- some logo here -->
       </v-flex>
-    </v-container>
+    </v-layout>
     <account-admin/>
-  </v-layout>
+    <v-card>
+      <footer>
+        <the-pending-email-status-panel/>
+      </footer>
+    </v-card>
+  </v-container>
+    <!--<email-composer v-if="getSelectedEmailAction ==='compose'"/>
+    <email-reader v-else-if="getSelectedEmailAction ==='read'"/>-->
+    <!-- some logo here -->
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
